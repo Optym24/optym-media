@@ -1,6 +1,11 @@
 import mysql from 'mysql';
 
-const db = mysql.createConnection(process.env.DATABASE_URL);
+const db = mysql.createConnection({
+  host: 'db4free.net',
+  user: 'suryansh',
+  password: 'elitmustest',
+  database: 'elitmus_db',
+});
 
 const connectToDatabase = () => {
   return new Promise((resolve, reject) => {
