@@ -19,7 +19,7 @@ const Profile = () => {
   const { currentUser } = useContext(AuthContext);
   const userId = parseInt(useLocation().pathname.split("/")[2]);
 
-  const { isLoading, error, data } = useQuery(["user"], () =>
+  const { isLoading, data } = useQuery(["user"], () =>
     makeRequest.get("/users/find/" + userId).then((res) => res.data)
   );
 
