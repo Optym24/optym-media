@@ -7,17 +7,12 @@ import moment from "moment";
 
 const Comments = ({ postId }) => {
   const [desc, setDesc] = useState("");
-
   const { currentUser } = useContext(AuthContext);
+  const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery(["comments"], () =>
-    makeRequest.get("/comments?postId=" + postId).then((res) => {
-      return res.data;
-    })
+    makeRequest.get("/comments?postId=" + postId).then((res) => res.data)
   );
-
-  // React Query
-  const queryClient = useQueryClient();
 
   const mutation = useMutation(
     (newComment) => {
@@ -25,7 +20,6 @@ const Comments = ({ postId }) => {
     },
     {
       onSuccess: () => {
-        // Invalidate and refetch
         queryClient.invalidateQueries(["comments"]);
       },
     }
@@ -49,20 +43,22 @@ const Comments = ({ postId }) => {
         />
         <button onClick={handleClick}>Send</button>
       </div>
-      {isLoading
-        ? "Loading..."
-        : data.map((comment) => (
-            <div className="comment">
-              <img src={comment.profilePicture} alt="" />
-              <div className="info">
-                <span>{comment.name}</span>
-                <p>{comment.desc}</p>
-              </div>
-              <span className="date">
-                {moment(comment.createdAt).fromNow()}
-              </span>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>Error loading comments</div>
+      ) : (
+        data.map((comment) => (
+          <div key={comment.id} className="comment">
+            <img src={comment.profilePicture} alt="" />
+            <div className="info">
+              <span>{comment.name}</span>
+              <p>{comment.desc}</p>
             </div>
-          ))}
+            <span className="date">{moment(comment.createdAt).fromNow()}</span>
+          </div>
+        ))
+      )}
     </div>
   );
 };
