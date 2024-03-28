@@ -10,24 +10,6 @@ import cors from "cors";
 import multer from "multer";
 import { connectToDatabase } from "./connect.js";
 
-import path from 'path';
-
-const _dirname =path.dirname("")
-const buildpath =path.join(_dirname  ,"../client/build");
-
-app.use(express.static(buildpath))
-
-app.get("/*", function(req, res){
-  res.sendFile(
-    path.join(__dirname, "../client/build/index.html"),
-    function(err) {
-      if(err) {
-        res.status(500).send(err);
-      }
-    }
-  )
-});
-
 connectToDatabase();
 const app = Express();
 app.use((req, res, next) => {

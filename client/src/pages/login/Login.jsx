@@ -25,10 +25,9 @@ const Login = () => {
       await login(inputs);
       navigate("/");
     } catch (err) {
-      setErr(err.response?.data || "An error occurred");
+      setErr(err.response.data);
     }
   };
-  
 
   return (
     <div className="login">
