@@ -6,7 +6,7 @@ const UsersList = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get("https://optym-media-1.onrender.com/api/users")
+    axios.get("http://localhost:5000/api/users")
       .then((response) => {
         setUsers(response.data);
       })
