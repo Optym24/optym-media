@@ -35,7 +35,7 @@ const Register = () => {
     e.preventDefault();
   
     try {
-      await axios.post("http://localhost:5000/api/auth/register", inputs);
+      await axios.post("https://optym-media-1.onrender.com/api/auth/register", inputs);
       setPopupMessage("User has been created.");
     } catch (err) {
       console.log(err);

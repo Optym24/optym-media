@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const makeRequest = axios.create({
-  baseURL: "http://localhost:5000/api/",
+  baseURL: "https://optym-media-1.onrender.com/api/",
   withCredentials: true,
 });

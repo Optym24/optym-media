@@ -12,6 +12,12 @@ import { connectToDatabase } from "./connect.js";
 
 connectToDatabase();
 const app = Express();
+
+import path from 'path';
+
+const _dirname =path.dirname("")
+const buildpath =path.join(_dirname , "../client/build");
+app.use(express.static(buildpath))
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", true);
 
